@@ -90,6 +90,34 @@
                 size++;
             }
 
+            public void RemoveLast()
+            {
+                if (IsEmpty())
+                {
+                    throw new InvalidOperationException("List is empty");
+                }
+                if (head == tail)  // One node
+                {
+                    head = tail = null;
+                    size--;
+                    return;
+                }
+
+                // Accounts for nodes of at least two.
+                Node? prev = head;
+                Node? curr = head.Next;
+                while (curr.Next != null)
+                {
+                    prev = curr;
+                    curr = curr.Next;
+                }
+
+                // curr is now the last node
+                prev.Next = null;
+                tail = prev;
+                size--;
+            }
+
             public Node? SearchHouse(int number)
             {
                 if(IsEmpty())
@@ -126,8 +154,11 @@
             list.AddFirst(101, "123 Num st.", HouseType.COLONIAL);
             list.AddLast(204, "345 Beach drive.", HouseType.RANCH);
             list.AddFirst(305, "789 Mariners Way.", HouseType.VICTORIAN);
+            list.AddLast(456, "123 Liverpool Way.", HouseType.None);
             list.Display();
             Console.WriteLine($"\nSize of the array is: {list.Size}");
+            list.RemoveLast();
+            list.Display();
 
             Console.Write("\nEnter house number to search: ");
             if (int.TryParse(Console.ReadLine(), out int num))
