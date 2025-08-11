@@ -1,4 +1,7 @@
-﻿namespace Assignment_6._1._1
+﻿using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Assignment_6._1._1
 {
     internal class Program
     {
@@ -23,6 +26,8 @@
                 Data = house;
                 Next = null;
             }
+
+            public override string ToString() => $"#{Number} | {Address} | {Data}";
 
         }
 
@@ -118,31 +123,14 @@
                 size--;
             }
 
-            public Node? SearchHouse(int number)
+            public Node? SearchHouse(int houseNumber)
             {
-                if(IsEmpty())
-                {
-                    throw new ArgumentException("Linked List is empty");
-                }
-                if(number <= 0 || number > size)
-                {
-                    throw new ArgumentException("number is not valid.");
-                }
-                if (number == 1) return head;
-                if (number == size) return tail;
-
-                Node curr = head;
-                int i = 1;
+                Node? curr = head;
                 while (curr != null)
                 {
-                    if (i == number)
-                    {
-                        return curr;
-                    }
+                    if (curr.Number == houseNumber) return curr;
                     curr = curr.Next;
-                    i++;
                 }
-                Console.WriteLine("No house found");
                 return null;
             }
 
@@ -151,10 +139,10 @@
         static void Main(string[] args)
         {
             LinkedNode list = new();
-            list.AddFirst(101, "123 Num st.", HouseType.COLONIAL);
-            list.AddLast(204, "345 Beach drive.", HouseType.RANCH);
-            list.AddFirst(305, "789 Mariners Way.", HouseType.VICTORIAN);
-            list.AddLast(456, "123 Liverpool Way.", HouseType.None);
+            list.AddFirst(101, "Num st.", HouseType.COLONIAL);
+            list.AddLast(204, "Beach drive.", HouseType.RANCH);
+            list.AddFirst(305, "Mariners Way.", HouseType.VICTORIAN);
+            list.AddLast(456, "Liverpool Way.", HouseType.None);
             list.Display();
             Console.WriteLine($"\nSize of the array is: {list.Size}");
             list.RemoveLast();
@@ -163,8 +151,12 @@
             Console.Write("\nEnter house number to search: ");
             if (int.TryParse(Console.ReadLine(), out int num))
             {
-                Node node = list.SearchHouse(num);
-                Console.WriteLine(node != null ? $"Found: {node.Data}" : "House not found.");
+                Node? node = list.SearchHouse(num);
+                Console.WriteLine(node is not null ? $"Found: {node}" : "House not found.");
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid integer house number.");
             }
         }
     }
