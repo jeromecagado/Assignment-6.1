@@ -134,6 +134,42 @@ namespace Assignment_6._1._1
                 return null;
             }
 
+            #region Additional Methods
+            //public bool AddAfter(int targetHouseNum, int number, string address, HouseType type)
+            //{
+            //    if (IsEmpty())
+            //        throw new InvalidOperationException("List is empty.");
+
+            //    Node? curr = head;
+            //    while (curr != null && curr.Number != targetHouseNum)
+            //    {
+            //        curr = curr.Next;
+            //    }
+            //    if (curr == null) return false; // target not found
+
+            //    Node newNode = new Node(number, address, type)
+            //    {
+            //        Next = curr.Next
+            //    };
+            //    curr.Next = newNode;
+
+            //    if (curr == tail) tail = newNode; // if inserted after last node, update tail
+            //    size++;
+            //    return true;
+            //}
+
+            //public bool Contains(int houseNumber)
+            //{
+            //    Node? curr = head;
+            //    while (curr != null)
+            //    {
+            //        if (curr.Number == houseNumber) return true;
+            //        curr = curr.Next;
+            //    }
+            //    return false;
+            //}
+            #endregion
+
 
         }
         static void Main(string[] args)
